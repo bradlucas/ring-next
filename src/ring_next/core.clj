@@ -110,7 +110,7 @@ else if POST then accept posted value and set the cookie."
     (response/file-response filepath)))
 
 (defn file
-  "Handle file request. If GET then read the file and return it's contents
+  "Handle file request. If GET then read the file and return its contents
 else if POST then accept the posted file and save it."
   [request]
   (let [file-command (fn [s] (keyword (get (clojure.string/split s #"/") 2)))
@@ -130,6 +130,7 @@ else if POST then accept the posted file and save it."
     (case uri
       ;; static file
       "/" (static-file "index.html")
+      "/index.html" (static-file "index.html")
 
       ;; cookie
       "/cookie" (static-file "cookie.html")
@@ -154,7 +155,7 @@ else if POST then accept the posted file and save it."
   (-> routes
       wrap-debug-print-request
       (wrap-request-method-message "This is a test message!!")
-      wrap-keyword-params                                            ;; this needs to be 'after' wrap-params so there is a :params field for it to it's work on
+      wrap-keyword-params                                            ;; this needs to be 'after' wrap-params so there is a :params field for it to its work on
       wrap-params
       wrap-cookies
       wrap-multipart-params       
